@@ -11,7 +11,6 @@ struct MissionView: View {
     struct CrewMember {
         let role: String
         let astronaut: Astronaut
-        
     }
     
     let mission: Mission
@@ -21,6 +20,8 @@ struct MissionView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
+                    
+                    // Mission Image
                     Image(mission.image)
                         .resizable()
                         .scaledToFit()
@@ -28,6 +29,8 @@ struct MissionView: View {
                         .padding(.top)
                     
                     VStack(alignment: .leading) {
+                        
+                        // Divider
                         Rectangle()
                             .frame(height: 2)
                             .foregroundColor(.lightBackground)
@@ -36,7 +39,7 @@ struct MissionView: View {
                         Text("Mission Highlights")
                             .font(.title.bold())
                             
-                        
+                        // Mission data
                         Text(mission.formattedLaunchDate)
                             .foregroundColor(.white.opacity(0.5))
                             .padding(.bottom, 5)
@@ -53,6 +56,7 @@ struct MissionView: View {
                     }
                     .padding(.horizontal)
                     
+                    // Performing crew view horizontaly
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(crew, id: \.role) { crewMember in

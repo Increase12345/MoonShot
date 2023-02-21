@@ -7,10 +7,10 @@
 
 import SwiftUI
 
+// Creating columns grid
 let columnsOfGrid = [
     GridItem(.adaptive(minimum: 150))
 ]
-
 let columnsOfList = [
     GridItem(.flexible(minimum: 150))
 ]
@@ -23,6 +23,8 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                
+                // Performing list of missions
                 LazyVGrid(columns: switchColumns ? columnsOfList: columnsOfGrid) {
                     ForEach(mission) { mission in
                         NavigationLink {
@@ -44,6 +46,8 @@ struct ContentView: View {
                                         .font(.caption)
                                         .foregroundColor(.white.opacity(0.5))
                                 }
+                                
+                                // Background of mission
                                 .padding(.vertical)
                                 .frame(maxWidth: .infinity)
                                 .background(.lightBackground)
@@ -56,16 +60,18 @@ struct ContentView: View {
                         }
                     }
                 }
-                .padding([.horizontal, .bottom])
+                .padding()
             }
             .navigationTitle("MoonShot")
             .background(.darkBackground)
             .preferredColorScheme(.dark)
             
+            // Button to switch between Grid and List
             .toolbar {
                 Button(switchColumns ? "Switch to List": "Switch to Grid") {
                     switchColumns.toggle()
                 }
+                .foregroundColor(.secondary)
             }
         }
     }
