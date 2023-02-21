@@ -7,18 +7,23 @@
 
 import SwiftUI
 
-let columns = [
+let columnsOfGrid = [
     GridItem(.adaptive(minimum: 150))
+]
+
+let columnsOfList = [
+    GridItem(.flexible(minimum: 150))
 ]
 
 struct ContentView: View {
     let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     let mission: [Mission] = Bundle.main.decode("missions.json")
+    @State private var switchColumns = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns) {
+                LazyVGrid(columns: switchColumns ? columnsOfList: columnsOfGrid) {
                     ForEach(mission) { mission in
                         NavigationLink {
                             MissionView(mission: mission, astronauts: astronauts)
@@ -56,6 +61,12 @@ struct ContentView: View {
             .navigationTitle("MoonShot")
             .background(.darkBackground)
             .preferredColorScheme(.dark)
+            
+            .toolbar {
+                Button(switchColumns ? "Switch to List": "Switch to Grid") {
+                    switchColumns.toggle()
+                }
+            }
         }
     }
 }
